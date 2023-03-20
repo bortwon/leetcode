@@ -578,4 +578,45 @@ class Solution:
 
 
 
+# 2574. Left and Right Sum Differences
+# Easy
+#
+# Given a 0-indexed integer array nums, find a 0-indexed integer array answer where:
+#
+# answer.length == nums.length.
+# answer[i] = |leftSum[i] - rightSum[i]|.
+# Where:
+#
+# leftSum[i] is the sum of elements to the left of the index i in the array nums. If there is no such
+# element, leftSum[i] = 0.
+# rightSum[i] is the sum of elements to the right of the index i in the array nums. If there is no such
+# element, rightSum[i] = 0.
+# Return the array answer.
+#
+# Example 1:
+#
+# Input: nums = [10,4,8,3]
+# Output: [15,1,11,22]
+
+
+class Solution:
+    def leftRigthDifference(self, nums: List[int]) -> List[int]:
+        result = []
+
+        left_sum = [0]
+        right_sum = [0]
+
+        for num in nums[:-1]:
+            left_sum.append(left_sum[-1] + num)
+
+        for num in nums[::-1][:-1]:
+            right_sum.insert(0, right_sum[0] + num)
+
+        for index in range(len(nums)):
+            result.append(abs(left_sum[index] - right_sum[index]))
+
+        return result
+
+
+
 #
